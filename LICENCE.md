@@ -1,4 +1,4 @@
-URLUtils
+ViewUtils
 
 Version 1.0, November 19th, 2011
 

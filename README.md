@@ -1,7 +1,7 @@
 Purpose
 --------------
 
-ViewUtils is a collection of category methods designed that extend UIView with all the handy little properties and functionality that you always wished were built-in to begin with. ViewUtils covers:
+ViewUtils is a collection of category methods that extend UIView with all the handy little properties and functionality that you always wished were built-in to begin with. ViewUtils covers:
 
 * Nib loading - makes it easy to load views from nibs without a UIViewController
 * Layout - set and get position and width/height properties individually
