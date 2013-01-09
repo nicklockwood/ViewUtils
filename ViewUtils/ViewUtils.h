@@ -1,7 +1,7 @@
 //
 //  ViewUtils.h
 //
-//  Version 1.0
+//  Version 1.1
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -40,18 +40,27 @@
 + (id)instanceWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)bundleOrNil owner:(id)owner;
 - (void)loadContentsWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)bundleOrNil;
 
-//view searching
+//hierarchy
 
 - (UIView *)viewMatchingPredicate:(NSPredicate *)predicate;
-- (UIView *)viewWithTag:(NSInteger)tag type:(Class)type;
-- (UIView *)viewOfType:(Class)type;
+- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)class;
+- (UIView *)viewOfClass:(Class)class;
 - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate;
 - (NSArray *)viewsWithTag:(NSInteger)tag;
-- (NSArray *)viewsWithTag:(NSInteger)tag type:(Class)type;
-- (NSArray *)viewsOfType:(Class)type;
+- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)class;
+- (NSArray *)viewsOfClass:(Class)class;
 
-//first responder
+- (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate;
+- (UIView *)firstSuperviewOfClass:(Class)class;
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag;
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)class;
 
+- (BOOL)viewOrAnySuperviewMatchesPredicate:(NSPredicate *)predicate;
+- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)class;
+- (BOOL)isSuperviewOfView:(UIView *)view;
+- (BOOL)isSubviewOfView:(UIView *)view;
+
+- (UIViewController *)firstViewController;
 - (UIView *)firstResponder;
 
 //frame accessors
@@ -84,5 +93,10 @@
 - (void)setWidth:(CGFloat)width right:(CGFloat)right;
 - (void)setTop:(CGFloat)top bottom:(CGFloat)bottom;
 - (void)setHeight:(CGFloat)height bottom:(CGFloat)bottom;
+
+//animation
+
+- (void)crossfadeWithDuration:(NSTimeInterval)duration;
+- (void)crossfadeWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion;
 
 @end

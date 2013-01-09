@@ -53,20 +53,41 @@ This method is similar to `instanceWithNibName:`, but instead of returning the f
     
 Returns either the view itself of the first subview that matches the specified predicate. If no subview matches, the method returns nil.
     
-    - (UIView *)viewWithTag:(NSInteger)tag type:(Class)type;
+    - (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)class;
     
 Returns either the view itself of the first subview that has the specified tag value, *and* is of the specified class. This is safer than the regular `viewWithTag:` method.
     
-    - (UIView *)viewOfType:(Class)type;
+    - (UIView *)viewOfClass:(Class)class;
     
 Returns either the view itself of the first subview of the specified class.
     
     - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate;
     - (NSArray *)viewsWithTag:(NSInteger)tag;
-    - (NSArray *)viewsWithTag:(NSInteger)tag type:(Class)type;
-    - (NSArray *)viewsOfType:(Class)type;
+    - (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)class;
+    - (NSArray *)viewsOfClass:(Class)class;
     
-These methods work exacly like their single-view equivalents, but instead of returning the first view that matches, they return all views that match. The search is performed in a depth-first fashion.
+These methods work exactly like their single-view equivalents, but instead of returning the first view that matches, they return all views that match. The search is performed in a depth-first fashion.
+
+    - (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate;
+    - (UIView *)firstSuperviewOfClass:(Class)class;
+    - (UIView *)firstSuperviewWithTag:(NSInteger)tag;
+    - (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)class;
+    
+These methods work like the viewMatching/Of/Width versions, but work *up* the view hierarchy instead of down and will return the first parent view that matches the specified criteria.
+
+    - (BOOL)viewOrAnySuperviewMatchesPredicate:(NSPredicate *)predicate;
+    - (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)class;
+
+This method returns YES if the view, or any superview in in the chain matches the criteria. This is useful for event handling, for example if you'd like to know if a given touch was either on or within a given control or control type, e.g. so you can ignore gestures performed on specific views.
+    
+    - (BOOL)isSuperviewOfView:(UIView *)view;
+    - (BOOL)isSubviewOfView:(UIView *)view;
+    
+These methods allow you to determine if a view is a child of another view. These methods will search the entire superview chain, not just a single level, so if one view is the superview *of the superview* of the other one, it will still return YES.
+
+    - (UIViewController *)firstViewController;
+
+This method uses the responder chain to identify the first view controller in the controller chain that is responsible for the view. So for example, if this method is called on a button, it will return the view controller that hosts the view that contains that button.
 
     - (UIView *)firstResponder;
     
@@ -78,6 +99,11 @@ This method returns the first responder if it is a subview of the view on which 
     - (void)setHeight:(CGFloat)height bottom:(CGFloat)bottom;
 
 It's often fiddly to set both the left and right edges of a view, or set the width without affecting the right-hand edge because the properties are linked. These setter methods make it a little easier to do this by allowing you to set both properties with a single method call.
+
+    - (void)crossfadeWithDuration:(NSTimeInterval)duration;
+    - (void)crossfadeWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion;
+    
+These methods use Core Animation to perform a crossfade transition of the specified duration. A crossfade is often useful if you want to animate the change of some view property that does not already support animation. A typical example would be changing the text in a UILabel or the image in a UIImageView.
 
 
 Extension Properties
