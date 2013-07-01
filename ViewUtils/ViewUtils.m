@@ -373,6 +373,26 @@
     self.center = CGPointMake(self.center.x, y);
 }
 
+- (CGFloat)centerX
+{
+    return self.x;
+}
+
+- (void)setCenterX:(CGFloat)centerX
+{
+    self.x = centerX;
+}
+
+- (CGFloat)centerY
+{
+    return self.y;
+}
+
+- (void)setCenterY:(CGFloat)centerY
+{
+    self.y = centerY;
+}
+
 //bounds accessors
 
 - (CGSize)boundsSize
