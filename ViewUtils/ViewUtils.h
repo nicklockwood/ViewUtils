@@ -100,3 +100,4 @@
 - (void)crossfadeWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion;
 
 @end
+
