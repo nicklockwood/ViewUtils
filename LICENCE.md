@@ -1,6 +1,6 @@
 ViewUtils
 
-Version 1.1, January 9th, 2013
+Version 1.1.1, September 12th, 2013
 
 Copyright (C) 2011 Charcoal Design
 

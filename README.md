@@ -53,30 +53,30 @@ This method is similar to `instanceWithNibName:`, but instead of returning the f
     
 Returns either the view itself of the first subview that matches the specified predicate. If no subview matches, the method returns nil.
     
-    - (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)class;
+    - (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)viewClass;
     
 Returns either the view itself of the first subview that has the specified tag value, *and* is of the specified class. This is safer than the regular `viewWithTag:` method.
     
-    - (UIView *)viewOfClass:(Class)class;
+    - (UIView *)viewOfClass:(Class)viewClass;
     
 Returns either the view itself of the first subview of the specified class.
     
     - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate;
     - (NSArray *)viewsWithTag:(NSInteger)tag;
-    - (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)class;
-    - (NSArray *)viewsOfClass:(Class)class;
+    - (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)viewClass;
+    - (NSArray *)viewsOfClass:(Class)viewClass;
     
 These methods work exactly like their single-view equivalents, but instead of returning the first view that matches, they return all views that match. The search is performed in a depth-first fashion.
 
     - (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate;
-    - (UIView *)firstSuperviewOfClass:(Class)class;
+    - (UIView *)firstSuperviewOfClass:(Class)viewClass;
     - (UIView *)firstSuperviewWithTag:(NSInteger)tag;
-    - (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)class;
+    - (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)viewClass;
     
 These methods work like the viewMatching/Of/Width versions, but work *up* the view hierarchy instead of down and will return the first parent view that matches the specified criteria.
 
     - (BOOL)viewOrAnySuperviewMatchesPredicate:(NSPredicate *)predicate;
-    - (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)class;
+    - (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)viewClass;
 
 This method returns YES if the view, or any superview in in the chain matches the criteria. This is useful for event handling, for example if you'd like to know if a given touch was either on or within a given control or control type, e.g. so you can ignore gestures performed on specific views.
     

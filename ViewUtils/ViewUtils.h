@@ -1,7 +1,7 @@
 //
 //  ViewUtils.h
 //
-//  Version 1.1
+//  Version 1.1.1
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -33,6 +33,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface UIView (ViewUtils)
 
 //nib loading
@@ -43,20 +44,20 @@
 //hierarchy
 
 - (UIView *)viewMatchingPredicate:(NSPredicate *)predicate;
-- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)_class;
-- (UIView *)viewOfClass:(Class)_class;
+- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)viewClass;
+- (UIView *)viewOfClass:(Class)viewClass;
 - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate;
 - (NSArray *)viewsWithTag:(NSInteger)tag;
-- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)_class;
-- (NSArray *)viewsOfClass:(Class)_class;
+- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)viewClass;
+- (NSArray *)viewsOfClass:(Class)viewClass;
 
 - (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate;
-- (UIView *)firstSuperviewOfClass:(Class)_class;
+- (UIView *)firstSuperviewOfClass:(Class)viewClass;
 - (UIView *)firstSuperviewWithTag:(NSInteger)tag;
-- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)_class;
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)viewClass;
 
 - (BOOL)viewOrAnySuperviewMatchesPredicate:(NSPredicate *)predicate;
-- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)_class;
+- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)viewClass;
 - (BOOL)isSuperviewOfView:(UIView *)view;
 - (BOOL)isSubviewOfView:(UIView *)view;
 

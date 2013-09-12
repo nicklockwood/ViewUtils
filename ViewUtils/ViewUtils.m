@@ -1,7 +1,7 @@
 //
 //  ViewUtils.m
 //
-//  Version 1.1
+//  Version 1.1.1
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -31,7 +31,7 @@
 //
 
 #import "ViewUtils.h"
-#import <objc/message.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation UIView (ViewUtils)
@@ -64,7 +64,7 @@
     }
     
     if (nib)
-    {        
+    {
         //attempt to load from nib
         NSArray *contents = [nib instantiateWithOwner:owner options:nil];
         UIView *view = [contents count]? [contents objectAtIndex:0]: nil;
@@ -112,20 +112,18 @@
     return nil;
 }
 
-- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)_class
+- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)viewClass
 {
-    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-                                        {
-                                            return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:_class];
-                                        }]];
+    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
+        return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:viewClass];
+    }]];
 }
 
-- (UIView *)viewOfClass:(Class)_class
+- (UIView *)viewOfClass:(Class)viewClass
 {
-    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-                                        {
-                                            return [evaluatedObject isKindOfClass:_class];
-                                        }]];
+    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused NSDictionary *bindings) {
+        return [evaluatedObject isKindOfClass:viewClass];
+    }]];
 }
 
 - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate
@@ -137,7 +135,7 @@
     }
     for (UIView *view in self.subviews)
     {
-        //check for subviews 
+        //check for subviews
         //avoid creating unnecessary array
         if ([view.subviews count])
         {
@@ -153,26 +151,23 @@
 
 - (NSArray *)viewsWithTag:(NSInteger)tag
 {
-    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-                                         {
-                                             return [evaluatedObject tag] == tag;
-                                         }]];
+    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused id bindings) {
+        return [evaluatedObject tag] == tag;
+    }]];
 }
 
-- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)_class
+- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)viewClass
 {
-    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-                                         {
-                                             return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:_class];
-                                         }]];
+    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused id bindings) {
+        return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:viewClass];
+    }]];
 }
 
-- (NSArray *)viewsOfClass:(Class)_class
+- (NSArray *)viewsOfClass:(Class)viewClass
 {
-    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
-                                         {
-                                             return [evaluatedObject isKindOfClass:_class];
-                                         }]];
+    return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused id bindings) {
+        return [evaluatedObject isKindOfClass:viewClass];
+    }]];
 }
 
 - (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate
@@ -184,24 +179,24 @@
     return [self.superview firstSuperviewMatchingPredicate:predicate];
 }
 
-- (UIView *)firstSuperviewOfClass:(Class)_class
+- (UIView *)firstSuperviewOfClass:(Class)viewClass
 {
-    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return [superview isKindOfClass:_class];
+    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, __unused id bindings) {
+        return [superview isKindOfClass:viewClass];
     }]];
 }
 
 - (UIView *)firstSuperviewWithTag:(NSInteger)tag
 {
-    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
+    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, __unused id bindings) {
         return superview.tag == tag;
     }]];
 }
 
-- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)_class
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)viewClass
 {
-    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return superview.tag == tag && [superview isKindOfClass:_class];
+    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, __unused id bindings) {
+        return superview.tag == tag && [superview isKindOfClass:viewClass];
     }]];
 }
 
@@ -214,16 +209,16 @@
     return [self.superview viewOrAnySuperviewMatchesPredicate:predicate];
 }
 
-- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)_class
+- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)viewClass
 {
-    return [self viewOrAnySuperviewMatchesPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return [superview isKindOfClass:_class];
+    return [self viewOrAnySuperviewMatchesPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, __unused id bindings) {
+        return [superview isKindOfClass:viewClass];
     }]];
 }
 
 - (BOOL)isSuperviewOfView:(UIView *)view
 {
-    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
+    return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, __unused id bindings) {
         return superview == view;
     }]] != nil;
 }
@@ -250,7 +245,7 @@
 
 - (UIView *)firstResponder
 {
-    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, __unused id bindings) {
         return [evaluatedObject isFirstResponder];
     }]];
 }
@@ -461,10 +456,11 @@
 
 - (void)crossfadeWithDuration:(NSTimeInterval)duration
 {
-    id animation = objc_msgSend(NSClassFromString(@"CATransition"), @selector(animation));
-    objc_msgSend(animation, @selector(setDuration:), duration);
-    objc_msgSend(animation, @selector(setType:), @"kCATransitionFade");
-    objc_msgSend(self.layer, @selector(addAnimation:forKey:), animation, nil);
+    //jump through a few hoops to avoid QuartzCore framework dependency
+    CAAnimation *animation = [NSClassFromString(@"CATransition") animation];
+    [animation setValue:@"kCATransitionFade" forKey:@"type"];
+    animation.duration = duration;
+    [self.layer addAnimation:animation forKey:nil];
 }
 
 - (void)crossfadeWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion
