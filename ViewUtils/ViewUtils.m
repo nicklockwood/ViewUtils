@@ -112,19 +112,19 @@
     return nil;
 }
 
-- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)class
+- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)_class
 {
     return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
                                         {
-                                            return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:class];
+                                            return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:_class];
                                         }]];
 }
 
-- (UIView *)viewOfClass:(Class)class
+- (UIView *)viewOfClass:(Class)_class
 {
     return [self viewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
                                         {
-                                            return [evaluatedObject isKindOfClass:class];
+                                            return [evaluatedObject isKindOfClass:_class];
                                         }]];
 }
 
@@ -159,19 +159,19 @@
                                          }]];
 }
 
-- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)class
+- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)_class
 {
     return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
                                          {
-                                             return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:class];
+                                             return [evaluatedObject tag] == tag && [evaluatedObject isKindOfClass:_class];
                                          }]];
 }
 
-- (NSArray *)viewsOfClass:(Class)class
+- (NSArray *)viewsOfClass:(Class)_class
 {
     return [self viewsMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
                                          {
-                                             return [evaluatedObject isKindOfClass:class];
+                                             return [evaluatedObject isKindOfClass:_class];
                                          }]];
 }
 
@@ -184,10 +184,10 @@
     return [self.superview firstSuperviewMatchingPredicate:predicate];
 }
 
-- (UIView *)firstSuperviewOfClass:(Class)class
+- (UIView *)firstSuperviewOfClass:(Class)_class
 {
     return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return [superview isKindOfClass:class];
+        return [superview isKindOfClass:_class];
     }]];
 }
 
@@ -198,10 +198,10 @@
     }]];
 }
 
-- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)class
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)_class
 {
     return [self firstSuperviewMatchingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return superview.tag == tag && [superview isKindOfClass:class];
+        return superview.tag == tag && [superview isKindOfClass:_class];
     }]];
 }
 
@@ -214,10 +214,10 @@
     return [self.superview viewOrAnySuperviewMatchesPredicate:predicate];
 }
 
-- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)class
+- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)_class
 {
     return [self viewOrAnySuperviewMatchesPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *superview, NSDictionary *bindings) {
-        return [superview isKindOfClass:class];
+        return [superview isKindOfClass:_class];
     }]];
 }
 
