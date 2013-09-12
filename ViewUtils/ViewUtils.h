@@ -43,20 +43,20 @@
 //hierarchy
 
 - (UIView *)viewMatchingPredicate:(NSPredicate *)predicate;
-- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)class;
-- (UIView *)viewOfClass:(Class)class;
+- (UIView *)viewWithTag:(NSInteger)tag ofClass:(Class)_class;
+- (UIView *)viewOfClass:(Class)_class;
 - (NSArray *)viewsMatchingPredicate:(NSPredicate *)predicate;
 - (NSArray *)viewsWithTag:(NSInteger)tag;
-- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)class;
-- (NSArray *)viewsOfClass:(Class)class;
+- (NSArray *)viewsWithTag:(NSInteger)tag ofClass:(Class)_class;
+- (NSArray *)viewsOfClass:(Class)_class;
 
 - (UIView *)firstSuperviewMatchingPredicate:(NSPredicate *)predicate;
-- (UIView *)firstSuperviewOfClass:(Class)class;
+- (UIView *)firstSuperviewOfClass:(Class)_class;
 - (UIView *)firstSuperviewWithTag:(NSInteger)tag;
-- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)class;
+- (UIView *)firstSuperviewWithTag:(NSInteger)tag ofClass:(Class)_class;
 
 - (BOOL)viewOrAnySuperviewMatchesPredicate:(NSPredicate *)predicate;
-- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)class;
+- (BOOL)viewOrAnySuperviewIsKindOfClass:(Class)_class;
 - (BOOL)isSuperviewOfView:(UIView *)view;
 - (BOOL)isSubviewOfView:(UIView *)view;
 
