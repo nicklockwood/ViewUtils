@@ -1,3 +1,7 @@
+Version 1.1.2
+
+- Now complies with the -Weverything warning level
+
 Version 1.1.1
 
 - Renamed class variables to avoid compiler errors when using C++

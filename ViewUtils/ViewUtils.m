@@ -1,7 +1,7 @@
 //
 //  ViewUtils.m
 //
-//  Version 1.1.1
+//  Version 1.1.2
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -32,6 +32,9 @@
 
 #import "ViewUtils.h"
 #import <QuartzCore/QuartzCore.h>
+
+
+#pragma GCC diagnostic ignored "-Wgnu"
 
 
 @implementation UIView (ViewUtils)
@@ -468,7 +471,7 @@
     [self crossfadeWithDuration:duration];
     if (completion)
     {
-        dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC);
+        dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC));
         dispatch_after(time, dispatch_get_main_queue(), completion);
     }
 }

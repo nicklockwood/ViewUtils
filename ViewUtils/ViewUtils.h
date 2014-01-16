@@ -1,7 +1,7 @@
 //
 //  ViewUtils.h
 //
-//  Version 1.1.1
+//  Version 1.1.2
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -32,7 +32,6 @@
 
 
 #import <UIKit/UIKit.h>
-
 
 @interface UIView (ViewUtils)
 
