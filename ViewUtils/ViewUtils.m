@@ -99,6 +99,40 @@
     }
 }
 
+- (void)loadContentsWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)bundleOrNil addAutoLayout:(BOOL)addAutoLayout
+{
+    [self loadContentsWithNibName:nibNameOrNil bundle:bundleOrNil];
+    
+    if (addAutoLayout) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        UIView *subView = self.subviews.firstObject;
+        
+        NSDictionary *viewsDictionary = @{@"subView":subView};
+        
+        NSString *con = [NSString stringWithFormat:@"H:[subView(%f)]", subView.width];
+        NSArray *constraint_H = [NSLayoutConstraint constraintsWithVisualFormat:con
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:viewsDictionary];
+        
+        [subView addConstraints:constraint_H];
+        
+        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[subView]-0-|"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:viewsDictionary];
+        
+        NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[subView]-0-|"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:viewsDictionary];
+        
+        [self addConstraints:constraint_POS_V];
+        [self addConstraints:constraint_POS_H];
+    }
+}
+
 //view searching
 
 - (UIView *)viewMatchingPredicate:(NSPredicate *)predicate
